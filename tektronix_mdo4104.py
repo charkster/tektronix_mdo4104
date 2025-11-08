@@ -76,24 +76,24 @@ class tektronix_mdo4104():
         Example:
             # - label, ver_scale, ver_offset (voltage value not divisions, with center line as 0V), bw, coupling
             analog_channels = {
-                1: ('VBUS1', 0.5,   0, '20E6', 'DC'),
-                2: ('IBUS1', 0.5,   1, 'FULl', 'DC'),
-                3: ('VBAT',  1.0, 0.2, '20E6', 'DC'),
-                4: ('VDDS',  0.5, 1.0, '20E6', 'DC')
+                1: ('VSIG_1', 0.5,   0, '20E6', 'DC'),
+                2: ('ISIG_2', 0.5,   1, 'FULl', 'DC'),
+                3: ('V_3',    1.0, 0.2, '20E6', 'DC'),
+                4: ('VDD_4',  0.5, 1.0, '20E6', 'DC')
             }
 
             # --- DIGITAL CHANNELS ---
             # key: digital channel; value: channel label
             digital_channels = {
-                0: 'vbus1_uv',
-                1: 'vbus12bat'
+                0: 'dig_sig1',
+                1: 'dig_sig2'
             }
 
             #--- MATH CHANNEL ---
             # valid math operations are +, -, *, /
             # - label, operator, source1, source2, vertical scale, vertical center
             math_channels = {
-                0: ('VIN-VOUT', '-', 'C1', 'C2', 1.00, 0.5)
+                0: ('V1-V2', '-', 'C1', 'C2', 1.00, 0.5)
             }
 
         """
@@ -307,3 +307,4 @@ class tektronix_mdo4104():
             self.scope.write('MEASUrement:MEAS%d:SOUrce%d %s' % (slot ,1, channel)) # single source measurement
             self.scope.write('MEASUrement:MEAS%s:TYPe %s'   % (slot, type))
             self.scope.write('MEASUrement:MEAS%d:STATE ON' % slot)
+
